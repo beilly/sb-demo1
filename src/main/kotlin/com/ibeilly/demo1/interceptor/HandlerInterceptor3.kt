@@ -2,6 +2,7 @@ package com.ibeilly.demo1.interceptor
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.lang.Nullable
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
@@ -12,35 +13,30 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType.Object
 
 @Component
 class HandlerInterceptor3 : HandlerInterceptor {
-    @Override
+
     @Throws(Exception::class)
-    fun preHandle(
-        httpServletRequest: HttpServletRequest?,
-        httpServletResponse: HttpServletResponse?,
-        o: Object?
-    ): Boolean {
-        LOG.info("执行拦截器的preHandle方法")
+    override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
+        LOG.info("执行拦截器的preHandle方法: $request.")
         return true
     }
 
-    @Override
     @Throws(Exception::class)
-    fun postHandle(
-        httpServletRequest: HttpServletRequest?,
-        httpServletResponse: HttpServletResponse?,
-        o: Object?,
-        modelAndView: ModelAndView?
+    override fun postHandle(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        handler: Any,
+        @Nullable modelAndView: ModelAndView?
     ) {
         LOG.info("执行拦截器的postHandle方法")
     }
 
-    @Override
+
     @Throws(Exception::class)
-    fun afterCompletion(
-        httpServletRequest: HttpServletRequest?,
-        httpServletResponse: HttpServletResponse?,
-        o: Object?,
-        e: Exception?
+    override fun afterCompletion(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        handler: Any,
+        @Nullable e: java.lang.Exception?
     ) {
         LOG.info("执行拦截器的afterCompletion方法")
     }
